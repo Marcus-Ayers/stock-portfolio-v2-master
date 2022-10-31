@@ -31,11 +31,14 @@ const App = () => {
   //CHANGE STOCK
 
   const handleChange = (e, index) => {
+    //IF I USE THIS ONE IT SAYS PORTFOLIO.REDUCE ISN'T A FUNCTION
+
     // const target = e.target;
     // const value = target.type;
     // const name = target.name;
     // setPortfolio({ [name]: value });
 
+    //IF I USE THIS IT SAYS I CANNOT ACCESS PORTFOLIO BEFORE INITIALIZATION
     const portfolio = portfolio.slice(); // shallow copy
     const { name, value } = e.target;
     portfolio[index][name] = value;
