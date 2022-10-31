@@ -1,6 +1,7 @@
 import { useState } from "react";
 import AddStock from "./components/AddStock";
 import Text from "./components/text";
+import React from "react";
 
 const App = () => {
   const [portfolio, setPortfolio] = useState([
@@ -30,11 +31,15 @@ const App = () => {
   //CHANGE STOCK
 
   const handleChange = (e, index) => {
-    console.log(portfolio.name);
     // const target = e.target;
     // const value = target.type;
     // const name = target.name;
     // setPortfolio({ [name]: value });
+
+    const portfolio = portfolio.slice(); // shallow copy
+    const { name, value } = e.target;
+    portfolio[index][name] = value;
+    setPortfolio({ portfolio });
   };
 
   //ADD STOCK
@@ -43,7 +48,7 @@ const App = () => {
 
     const newStock = { id, ...stock };
     setPortfolio([...portfolio, newStock]);
-    console.log(newStock);
+    //console.log(newStock);
   };
 
   //DELETE STOCK

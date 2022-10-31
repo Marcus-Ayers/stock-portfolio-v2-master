@@ -1,4 +1,8 @@
-const Text = ({ portfolio, onDelete, onChange, handleChange }) => {
+import { hasUnreliableEmptyValue } from "@testing-library/user-event/dist/utils";
+import { useState } from "react";
+import React from "react";
+
+const Text = ({ portfolio, onDelete, handleChange, onChange }) => {
   const portfolio_market_value = portfolio.reduce(
     (sum, stock) => stock.shares_owned * stock.market_price + sum,
     0
@@ -8,6 +12,10 @@ const Text = ({ portfolio, onDelete, onChange, handleChange }) => {
     0
   );
   const portfolio_gain_loss = portfolio_market_value - portfolio_cost;
+
+  // const handleChange2 = (e) => {
+  //   console.log(e);
+  // };
   return (
     <>
       <div className="App">
@@ -37,7 +45,7 @@ const Text = ({ portfolio, onDelete, onChange, handleChange }) => {
                     return (
                       <tr
                         key={portfolio.id}
-                        onChange={() => onChange(portfolio.id)}
+                        //onChange={() => onChange(portfolio.id)}
                       >
                         <td>{name}</td>
                         <td>
@@ -45,6 +53,7 @@ const Text = ({ portfolio, onDelete, onChange, handleChange }) => {
                             type="number"
                             name="shares_owned"
                             defaultValue={shares_owned}
+                            onChange={(e) => onChange(e, portfolio.id)}
                           />
                         </td>
                         <td>
@@ -52,6 +61,7 @@ const Text = ({ portfolio, onDelete, onChange, handleChange }) => {
                             type="number"
                             name="cost_per_share"
                             defaultValue={cost_per_share}
+                            onChange={(e) => onChange(e, portfolio.id)}
                           />
                         </td>
                         <td>
@@ -59,6 +69,7 @@ const Text = ({ portfolio, onDelete, onChange, handleChange }) => {
                             type="number"
                             name="market_price"
                             defaultValue={market_price}
+                            onChange={(e) => onChange(e, portfolio.id)}
                           />
                         </td>
                         <td>{market_value}</td>
