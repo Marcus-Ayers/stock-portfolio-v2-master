@@ -1,5 +1,4 @@
 import { hasUnreliableEmptyValue } from "@testing-library/user-event/dist/utils";
-import { useState } from "react";
 import React from "react";
 
 const Text = ({ portfolio, onDelete, handleChange, onChange }) => {
@@ -36,16 +35,17 @@ const Text = ({ portfolio, onDelete, handleChange, onChange }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {portfolio.map((portfolio) => {
+                  {portfolio.map((stock, index) => {
                     const { name, shares_owned, cost_per_share, market_price } =
-                      portfolio;
+                      stock;
                     const market_value = shares_owned * market_price;
                     const unrealized_gain_loss =
                       market_value - shares_owned * cost_per_share;
+
                     return (
                       <tr
-                        key={portfolio.id}
-                        //onChange={() => onChange(portfolio.id)}
+                        key={stock.id}
+                        //onChange={() => onChange(stock.id)}
                       >
                         <td>{name}</td>
                         <td>
@@ -53,7 +53,7 @@ const Text = ({ portfolio, onDelete, handleChange, onChange }) => {
                             type="number"
                             name="shares_owned"
                             defaultValue={shares_owned}
-                            onChange={(e) => onChange(e, portfolio.id)}
+                            onChange={(e) => onChange(e, index)}
                           />
                         </td>
                         <td>
@@ -61,7 +61,7 @@ const Text = ({ portfolio, onDelete, handleChange, onChange }) => {
                             type="number"
                             name="cost_per_share"
                             defaultValue={cost_per_share}
-                            onChange={(e) => onChange(e, portfolio.id)}
+                            onChange={(e) => onChange(e, index)}
                           />
                         </td>
                         <td>
@@ -69,7 +69,7 @@ const Text = ({ portfolio, onDelete, handleChange, onChange }) => {
                             type="number"
                             name="market_price"
                             defaultValue={market_price}
-                            onChange={(e) => onChange(e, portfolio.id)}
+                            onChange={(e) => onChange(e, index)}
                           />
                         </td>
                         <td>{market_value}</td>
@@ -77,7 +77,7 @@ const Text = ({ portfolio, onDelete, handleChange, onChange }) => {
                         <td>
                           <button
                             className="btn btn-light btn-sm"
-                            onClick={() => onDelete(portfolio.id)}
+                            onClick={() => onDelete(stock.id)}
                           >
                             remove
                           </button>

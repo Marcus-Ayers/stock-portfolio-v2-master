@@ -1,7 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import AddStock from "./components/AddStock";
 import Text from "./components/text";
-import React from "react";
+// import  from "react";
 
 const App = () => {
   const [portfolio, setPortfolio] = useState([
@@ -39,10 +39,10 @@ const App = () => {
     // setPortfolio({ [name]: value });
 
     //IF I USE THIS IT SAYS I CANNOT ACCESS PORTFOLIO BEFORE INITIALIZATION
-    const portfolio = portfolio.slice(); // shallow copy
+    // const portfolio = portfolio.slice(); // shallow copy
     const { name, value } = e.target;
-    portfolio[index][name] = value;
-    setPortfolio({ portfolio });
+    portfolio[index][name] = Number(value);
+    setPortfolio([...portfolio]);
   };
 
   //ADD STOCK
